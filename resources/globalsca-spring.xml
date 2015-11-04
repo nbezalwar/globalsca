@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- Replace original list with custom handler list -->
+	<alias alias="itemHandlers" name="scaItemHandlers" />
+
+	<!-- Customized original handler list -->	
+	<util:list id="scaItemHandlers" value-type="org.gs4tr.projectdirector.adaptors.hybris.service.ItemHandler">
+		<!-- Order is important if Items are instanceof multiple types for which handlers exist -->
+		<!-- Start SCA custom handlers -->
+		<ref bean="scaScaProductHandler" />
+		<ref bean="scaScaGlobalCategoryHandler" />
+		<ref bean="scaEnvInfoTextBlockHandler" />
+		<ref bean="scaIncoProductHandler" />
+		<ref bean="scaIncoGlobalCategoryHandler" />
+		<ref bean="scaIncoProductBenefitHandler" />
+		<ref bean="scaTargetGroupQuestionnaireTextHandler" />
+		<!-- End SCA custom handlers/Start original handler list -->
+		<ref bean="keywordHandler" />
+		<ref bean="productFeatureHandler" />
+		<ref bean="classAttributeAssignmentHandler" />
+		<ref bean="classificationClassHandler" />
+		<ref bean="categoryHandler" />
+		<ref bean="productHandler" />
+		<ref bean="itemModelHandler" /><!-- leave as last -->
+	</util:list>
+	
+	<bean id="scaScaProductHandler"
+		class="org.gs4tr.projectdirector.adaptors.hybris.service.handlers.ScaScaProductHandler"
+		parent="defaultItemHandler" />
+	
+	<bean id="scaScaGlobalCategoryHandler"
+		class="org.gs4tr.projectdirector.adaptors.hybris.service.handlers.ScaScaGlobalCategoryHandler"
+		parent="defaultItemHandler" />
+	
+	<bean id="scaEnvInfoTextBlockHandler"
+		class="org.gs4tr.projectdirector.adaptors.hybris.service.handlers.ScaEnvInfoTextBlockHandler"
+		parent="defaultItemHandler" />
+	
+	<bean id="scaTargetGroupQuestionnaireTextHandler"
+		class="org.gs4tr.projectdirector.adaptors.hybris.service.handlers.ScaTargetGroupQuestionnaireTextHandler"
+		parent="defaultItemHandler" />
+		
+	<bean id="scaIncoProductHandler"
+		class="org.gs4tr.projectdirector.adaptors.hybris.service.handlers.ScaIncoProductHandler"
+		parent="defaultItemHandler" />
+	
+	<bean id="scaIncoGlobalCategoryHandler"
+		class="org.gs4tr.projectdirector.adaptors.hybris.service.handlers.ScaIncoGlobalCategoryHandler"
+		parent="defaultItemHandler" />
+	
+	<bean id="scaIncoProductBenefitHandler"
+		class="org.gs4tr.projectdirector.adaptors.hybris.service.handlers.ScaIncoProductBenefitHandler"
+		parent="defaultItemHandler" />
+	
+	<!--
+		Replace original list with custom voter list
+	-->
+	<alias alias="localizabilityVoters" name="scaLocalizabilityVoters" />
+	
+	<!-- Customized original voter list -->
+	<util:list id="scaLocalizabilityVoters" value-type="org.gs4tr.projectdirector.adaptors.hybris.service.voting.LocalizabilityVoter">
+		<!-- Start SCA custom voters -->
+		<ref bean="scaIncoProductLocalizabilityVoter" />
+		<ref bean="scaIncoProductBenefitLocalizabilityVoter" />
+		<ref bean="scaIncoGlobalCategoryLocalizabilityVoter" />
+		<!-- End SCA custom voters/Start original voter list -->
+		<ref bean="productLocalizabilityVoter" />
+		<ref bean="configurableLocalizabilityVoter" />
+		<ref bean="typeConfigurationVoter" />
+	</util:list>
+	
+	<bean id="scaIncoProductLocalizabilityVoter" class="org.gs4tr.projectdirector.adaptors.hybris.service.voting.ScaIncoProductLocalizabilityVoter" />
+	
+	<bean id="scaIncoProductBenefitLocalizabilityVoter" class="org.gs4tr.projectdirector.adaptors.hybris.service.voting.ScaIncoProductBenefitLocalizabilityVoter" />
+	
+	<bean id="scaIncoGlobalCategoryLocalizabilityVoter" class="org.gs4tr.projectdirector.adaptors.hybris.service.voting.ScaIncoGlobalCategoryLocalizabilityVoter" />
+	
+	<!-- Replace original DocumentNameGenerator with custom generator -->
+	<alias alias="documentNameGenerator" name="scaDocumentNameGenerator" />
+	
+	<bean id="scaDocumentNameGenerator"
+		class="org.gs4tr.projectdirector.adaptors.hybris.service.impl.ScaDocumentNameGenerator" />
+	
+	<!-- Replace original list with custom decorator list -->	
+	<alias alias="xmlDecorators" name="scaXmlDecorators" />
+	
+	<!-- Customized original decorator list -->
+	<util:list id="scaXmlDecorators" value-type="org.gs4tr.projectdirector.adaptors.hybris.service.xml.XMLDecorator">
+		<!-- Start SCA custom decorators -->
+		<ref bean="scaItemDecorator" />
+		<ref bean="scaScaProductDecorator" />
+		<ref bean="scaScaGlobalCategory" />
+		<ref bean="scaEnvInfoTextBlockDecorator" />
+		<ref bean="scaEnvInfoTextSegmentDecorator" />
+		<ref bean="scaIncoProductDecorator" />
+		<ref bean="scaIncoProductBenefitDecorator" />
+		<ref bean="scaIncoGlobalCategoryDecorator" />
+		<ref bean="scaIncoFinderCategoryDecorator" />
+		<ref bean="scaTargetGroupQuestionnaireTextDecorator" />
+		<ref bean="scaSegmentizedTextDecorator" />
+		<ref bean="scaScaCelumAssetDecorator" />
+
+		<!-- End SCA custom decorators/Start original list -->
+		<ref bean="maximumContentLengthDecorator" />
+		<ref bean="itemRelationshipDecorator" />
+		<ref bean="productDecorator" />
+		<ref bean="productFeatureDecorator" />
+	</util:list>
+	
+	<!-- Replace original ItemRelationshipDecorator with custom decorator -->
+	<alias alias="itemRelationshipDecorator" name="scaItemRelationshipDecorator" />
+	
+	<bean id="scaItemRelationshipDecorator" class="org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator.ScaItemRelationshipDecorator" />
+	
+	<bean id="scaItemDecorator" class="org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator.ScaItemDecorator" />
+	
+	<bean id="scaScaProductDecorator" class="org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator.ScaScaProductDecorator" />
+	
+	<bean id="scaScaGlobalCategory" class="org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator.ScaScaGlobalCategoryDecorator" />
+	
+	<bean id="scaEnvInfoTextBlockDecorator" class="org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator.ScaEnvInfoTextBlockDecorator" />
+	
+	<bean id="scaEnvInfoTextSegmentDecorator" class="org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator.ScaEnvInfoTextSegmentDecorator" />
+	
+	<bean id="scaIncoProductDecorator" class="org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator.ScaIncoProductDecorator" />
+	
+	<bean id="scaIncoProductBenefitDecorator" class="org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator.ScaIncoProductBenefitDecorator" />
+	
+	<bean id="scaIncoGlobalCategoryDecorator" class="org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator.ScaIncoGlobalCategoryDecorator" />
+	
+	<bean id="scaIncoFinderCategoryDecorator" class="org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator.ScaIncoFinderCategoryDecorator" />
+	
+	<bean id="scaTargetGroupQuestionnaireTextDecorator" class="org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator.ScaTargetGroupQuestionnaireTextDecorator" />
+
+	<bean id="scaSegmentizedTextDecorator" class="org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator.ScaSegmentizedTextDecorator" />
+
+	<bean id="scaScaCelumAssetDecorator" class="org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator.ScaScaCelumAssetDecorator" />
+
+	<!--
+		Content monitor providers
+	-->
+	<bean id="scaIncoProductProvider" class="org.gs4tr.projectdirector.adaptors.hybris.service.monitor.provider.ScaIncoProductProvider" />
+	
+	<bean id="scaIncoProductBenefitProvider" class="org.gs4tr.projectdirector.adaptors.hybris.service.monitor.provider.ScaIncoProductBenefitProvider" />
+	
+	<bean id="scaIncoGlobalCategoryProvider" class="org.gs4tr.projectdirector.adaptors.hybris.service.monitor.provider.ScaIncoGlobalCategoryProvider" />
+	
+	<bean id="scaIncoFinderCategoryProvider" class="org.gs4tr.projectdirector.adaptors.hybris.service.monitor.provider.ScaIncoFinderCategoryProvider" />
+	
+	<bean id="scaTargetGroupQuestionnaireTextProvider" class="org.gs4tr.projectdirector.adaptors.hybris.service.monitor.provider.ScaTargetGroupQuestionnaireTextProvider" />
+	
+	<bean id="scaScaProductProvider" class="org.gs4tr.projectdirector.adaptors.hybris.service.monitor.provider.ScaScaProductProvider" />
+	
+	<bean id="scaScaGlobalCategoryProvider" class="org.gs4tr.projectdirector.adaptors.hybris.service.monitor.provider.ScaScaGlobalCategoryProvider" />
+	
+	<bean id="scaEnvInfoTextBlockProvider" class="org.gs4tr.projectdirector.adaptors.hybris.service.monitor.provider.ScaEnvInfoTextBlockProvider" />
+	
+</beans>

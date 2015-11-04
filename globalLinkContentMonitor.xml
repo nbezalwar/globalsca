@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contentMonitor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="globalLinkContentMonitor.xsd" schemaVersion="1">
+  <content id="inco">
+    <provider bean="scaIncoProductProvider" />
+    <provider bean="scaIncoProductBenefitProvider" />
+    <provider bean="scaIncoGlobalCategoryProvider" />
+    <provider bean="scaIncoFinderCategoryProvider" />
+    <provider bean="scaTargetGroupQuestionnaireTextProvider" />
+  </content>
+  <content id="afh">
+    <provider bean="scaScaProductProvider" />
+    <provider bean="scaScaGlobalCategoryProvider" />
+    <provider bean="scaEnvInfoTextBlockProvider" />
+  </content>
+	<!--
+		Master catalog for testing purposes only
+	-->
+  <catalog id="Inco_central" version="Online">
+    <scan content="inco" project="HYB000001" source="en" target="sv-SE" />
+  </catalog>
+  <catalog id="SE_local" version="Online">
+    <scan content="inco" project="HYB000001" source="en" target="sv-SE" />
+    <scan content="afh" project="HYB000001" source="en" target="sv-SE" />
+  </catalog>
+  <catalog id="BE_local" version="Online">
+    <scan content="inco" project="HYB000001" source="en" target="fr-BE,nl-BE" />
+  </catalog>
+  <catalog id="DK_local" version="Online">
+    <scan content="afh" project="HYB000001" source="en" target="da-DK" />
+  </catalog>
+</contentMonitor>
