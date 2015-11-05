@@ -1,0 +1,13 @@
+## This is the header
+Errors in Content Monitor
+## This is the body
+$message
+
+#if ($exception)
+The following error was encountered: $exception
+#end
+
+#if ($stacktrace)
+Stack Trace:
+$stacktrace
+#end

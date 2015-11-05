@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contentMonitor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="globalLinkContentMonitor.xsd" schemaVersion="1">
+  <content id="products">
+    <provider bean="productCatalogContentProvider" />
+  </content>
+  <catalog id="electronicsProductCatalog" version="Staged">
+    <scan content="products" project="HYB000001" source="en" target="de,fr" />
+  </catalog>
+</contentMonitor>

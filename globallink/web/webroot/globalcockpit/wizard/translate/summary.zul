@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns:zk="http://www.zkoss.org/2005/zk"
+        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd ">
+	<style>
+	</style>
+	
+	<custom-attributes scope="page"
+		labelClose="${c:l('globalcockpit.wizard.translate.button.close')}"
+	/>
+	
+	<zscript><![CDATA[
+		done.setLabel(page.getAttribute("labelClose"));
+	    Object[] summaryMessageParams = new Object[]{controllerBean.getItemCount()};
+	]]></zscript>
+	
+	<div style="padding: 10px; text-align: left; font-size: 10px;">
+		<label style="color: red; font-weight: bold;" value="${c:l('globalcockpit.wizard.translate.summary.error')}" if="${empty controllerBean.itemCount}"/>
+		<div unless="${empty controllerBean.itemCount}">
+			<label value="${c:l2('globalcockpit.wizard.translate.summary.message', summaryMessageParams)}" />
+		</div>
+	</div>       
+</zk>

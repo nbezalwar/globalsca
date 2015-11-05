@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration xmlns="hybris.de/schemas/hmc/generic"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="hybris.de/schemas/hmc/generic hmc.xsd">
+	
+	<action type="toolbar" classname="org.gs4tr.projectdirector.adaptors.hybris.hmc.action.CronJobAction"
+		name="toolbaraction.submittopdcronjob.name"
+		tooltip="toolbaraction.submittopdcronjob.tooltip"
+        icon="userrights_export"
+		align="right">
+		<parameter key="cronjob" value="submitToPDCronJob" />
+	</action>
+	
+	<action type="toolbar" classname="org.gs4tr.projectdirector.adaptors.hybris.hmc.action.CronJobAction"
+		name="toolbaraction.fetchfrompdcronjob.name"
+		tooltip="toolbaraction.fetchfrompdcronjob.tooltip"
+        icon="userrights_import"
+		align="right">
+		<parameter key="cronjob" value="fetchFromPDCronJob" />
+	</action>
+	
+	<explorertree>
+		<group name="globallinkgroup">
+			<typeref type="GlobalLinkConfig" />
+			<typeref type="GlobalLinkJob" />
+			<typeref type="GlobalLinkJobItem" />
+			<typeref type="GlobalLinkTranslatedContent" />
+		</group>
+	</explorertree>
+
+	<type name="GlobalLinkConfig"><!-- TODO mode="append" instead of default "replace" ? -->
+		<organizer>
+			<search autoperform="true"><!-- TODO mode="replace" instead of default 
+					"append" ? -->
+				<condition attribute="pDURL" operator="contains" />
+				<condition attribute="username" operator="contains" />
+				<condition attribute="defaultProject" operator="contains" />
+			</search>
+			<result>
+				<listview><!-- TODO mode="replace" instead of default "append" ? -->
+					<itemlayout>
+						<attribute name="pDURL" width="200" />
+						<attribute name="username" width="100" />
+						<attribute name="defaultProject" width="200" />
+					</itemlayout>
+				</listview>
+			</result>
+			<editor>
+				<tab name="tab.globallinkconfig"><!-- TODO mode="replace" instead of default "append" ? -->
+					<section name="tab.globallinkconfig.section.globallinkconfig">
+						<listlayout>
+							<attribute name="pDURL" />
+							<attribute name="username" />
+							<attribute name="password">
+								<stringeditor encrypted="true" />
+							</attribute>
+							<attribute name="defaultProject" />
+						</listlayout>
+					</section>
+					<section name="tab.globallinkconfig.section.languagemapping">
+						<listlayout>
+							<attribute name="languageMappings">
+								<referencecollectioneditor editable="true"
+									externalcreate="false" create="true" remove="true" autosave="true"
+									presetattribute="config">
+									<itemlayout>
+										<attribute name="language" />
+										<attribute name="pDLocale">
+											<display classname="org.gs4tr.projectdirector.adaptors.hybris.hmc.webchips.LanguageMappingLocaleEditorChip" />
+										</attribute>
+									</itemlayout>
+								</referencecollectioneditor>
+							</attribute>
+						</listlayout>
+					</section>
+					<section name="tab.globallinkconfig.section.notification">
+						<listlayout>
+							<attribute name="notificationRecipients">
+								<referencecollectioneditor editable="true"
+									externalcreate="false" create="true" add="true" remove="true"
+									autosave="true" presetattribute="config">
+									<itemlayout>
+										<attribute name="email" width="200" />
+									</itemlayout>
+								</referencecollectioneditor>
+							</attribute>
+						</listlayout>
+					</section>
+				</tab>
+				<tab name="tab.productpreviewurls">
+					<section name="tab.productpreviewurls.section.mappings">
+						<listlayout>
+							<attribute name="productPreviewURLMappings" width="550">
+								<referencecollectioneditor editable="true"
+									externalcreate="false" create="true" remove="true" autosave="true"
+									presetattribute="config">
+									<itemlayout>
+										<attribute name="catalog" width="250" />
+										<attribute name="url" width="250" />
+									</itemlayout>
+								</referencecollectioneditor>
+							</attribute>
+						</listlayout>
+					</section>
+				</tab>
+				<tab name="tab.features">
+					<section name="tab.features.section.assignments">
+						<listlayout>
+							<text name="tab.features.section.assignments.help"/>
+							<attribute name="includeFeatures">
+								<advancedbooleaneditor wrapvalues="true"
+									truename="tab.features.section.assignments.includefeatures.include"
+									falsename="tab.features.section.assignments.includefeatures.exclude" />
+							</attribute>
+							<attribute name="classificationAttributeAssignments" width="750">
+								<referencecollectioneditor editable="true"
+									externalcreate="false" create="false" remove="true" autosave="true"
+									presetattribute="config">
+									<itemlayout>
+										<attribute name="classificationClass" width="250" />
+										<attribute name="classificationAttribute" width="450" />
+									</itemlayout>
+								</referencecollectioneditor>
+							</attribute>
+						</listlayout>
+					</section>
+				</tab>
+				<tab name="tab.attributes">
+					<section name="tab.attributes.section.types">
+						<listlayout>
+							<attribute name="typeConfigurations" width="750">
+								<referencecollectioneditor editable="true"
+									externalcreate="false" create="true" remove="true" autosave="true"
+									presetattribute="config">
+									<itemlayout>
+										<attribute name="type" width="250" />
+										<attribute name="localizeSelected" width="450" />
+									</itemlayout>
+								</referencecollectioneditor>
+							</attribute>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	
+	<type name="GlobalLinkTypeConfiguration">
+		<organizer>
+			<search>
+				<condition attribute="type" operator="equal" />
+			</search>
+			<result>
+				<listview>
+					<itemlayout>
+						<attribute name="type" width="100" />
+						<attribute name="localizeSelected" width="100" />
+					</itemlayout>
+				</listview>
+			</result>
+			<editor>
+				<tab name="tab.globallinktypeconfiguration.properties"><!-- TODO mode="replace" instead of default "append" ? -->
+					<section name="tab.globallinktypeconfiguration.section.general">
+						<listlayout>
+							<attribute name="type" editable="false" />
+							<attribute name="localizeSelected" />
+						</listlayout>
+					</section>
+					<section name="tab.globallinktypeconfiguration.section.attributes">
+						<listlayout>
+							<attribute name="attributes" labelwidth="150">
+								<customeditor classname="org.gs4tr.projectdirector.adaptors.hybris.hmc.webchips.TypeAttributesSelectionEditorChip" />
+							</attribute>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	
+	<type name="GlobalLinkJob">
+		<organizer>
+			<search>
+				<condition attribute="id" operator="equal" />
+				<condition attribute="name" operator="contains" />
+				<condition attribute="creator" operator="equal" />
+				<condition attribute="status" operator="equal" />
+				<condition attribute="sourceLanguage" operator="equal" />
+				<condition attribute="targetLanguages" operator="contains" />
+				<condition attribute="project" operator="equal" />
+				<condition attribute="pk" operator="equal" />
+			</search>
+			<result>
+				<listview>
+					<itemlayout>
+						<attribute name="id" width="50" />
+						<attribute name="pk" width="125" />
+						<attribute name="name" width="200" />
+						<attribute name="creator" width="100" />
+						<attribute name="status" width="50" />
+						<attribute name="dueDate" width="70">
+							<display classname="de.hybris.platform.hmc.attribute.DateDisplayChip" />
+						</attribute>
+						<attribute name="sourceLanguage" width="95" />
+						<attribute name="targetLanguages" width="95" />
+						<attribute name="submitNewAndChangedContentOnly" width="95" />
+						<attribute name="translateKeywords" width="95" />
+						<attribute name="translateProductFeatures" width="95" />
+						<attribute name="project" width="100" />
+						<attribute name="error" width="300" />
+					</itemlayout>
+				</listview>
+			</result>
+			<editor>
+				<tab name="tab.globallinkjob.properties"><!-- TODO mode="replace" instead of default "append" ? -->
+					<section name="tab.globallinkjob.properties.section.properties">
+						<listlayout>
+							<attribute name="pk"  />
+							<attribute name="id" />
+							<attribute name="name" editable="false" />
+							<attribute name="creator" editable="false" />
+							<attribute name="status" editable="false" />
+							<attribute name="dueDate" editable="false" />
+							<attribute name="sourceLanguage" editable="false" />
+							<attribute name="targetLanguages" editable="false" />
+							<attribute name="submitNewAndChangedContentOnly" editable="false" />
+							<attribute name="translateKeywords" editable="false" />
+							<attribute name="translateProductFeatures" editable="false" />
+							<attribute name="project" editable="false" />
+							<attribute name="error" editable="false" />
+						</listlayout>
+					</section>
+				</tab>
+				<tab name="tab.globallinkjob.jobitems">
+					<section name="tab.globallinkjob.jobitems.section.jobitems">
+						<listlayout>
+							<attribute name="jobItems">
+								<referencecollectioneditor create="false" add="false" remove="false" autosave="false">
+									<itemlayout>
+										<attribute name="id" width="50" />
+										<attribute name="pk" width="125" />
+										<attribute name="name" width="150" />
+										<attribute name="targets" width="150" />
+										<attribute name="item" width="50" />
+									</itemlayout>
+								</referencecollectioneditor>
+							</attribute>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	
+	<type name="GlobalLinkJobItem">
+		<organizer>
+			<search>
+				<condition attribute="id" operator="equal" />
+				<condition attribute="job" operator="equal" />
+				<condition attribute="name" operator="contains" />
+				<condition attribute="pk" operator="equal" />
+				<condition attribute="item" operator="equal" />
+			</search>
+			<result>
+				<listview>
+					<itemlayout>
+						<attribute name="id" width="50" />
+						<attribute name="pk" width="125" />
+						<attribute name="job" width="125" />
+						<attribute name="name" width="150" />
+						<attribute name="targets" width="100" />
+						<attribute name="item" width="300" />
+					</itemlayout>
+				</listview>
+			</result>
+			<editor>
+				<tab name="tab.globallinkjobitem.properties"><!-- TODO mode="replace" instead of default "append" ? -->
+					<section name="tab.globallinkjobitem.properties.section.properties">
+						<listlayout>
+							<attribute name="id" />
+							<attribute name="pk"  />
+							<attribute name="job" editable="false" />
+							<attribute name="name" editable="false" />
+							<attribute name="targets" editable="false">
+								<referencecollectioneditor create="false" add="false" remove="false" autosave="false">
+									<itemlayout>
+										<attribute name="targetLanguage" width="100" />
+										<attribute name="status" width="50" />
+									</itemlayout>
+								</referencecollectioneditor>
+							</attribute>
+							<attribute name="item" editable="false" />
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	
+	<type name="GlobalLinkTranslatedContent">
+		<organizer>
+			<search>
+				<condition attribute="item" operator="equal" />
+				<condition attribute="source" operator="equal" />
+				<condition attribute="target" operator="contains" />
+			</search>
+			<result>
+				<listview>
+					<itemlayout>
+						<attribute name="item" width="300" />
+						<attribute name="source" width="100" />
+						<attribute name="target" width="100" />
+						<attribute name="creationtime" width="120" />
+						<attribute name="modifiedtime" width="120" />
+					</itemlayout>
+				</listview>
+			</result>
+			<editor>
+				<tab name="tab.globallinktranslatedcontent.properties"><!-- TODO mode="replace" instead of default "append" ? -->
+					<section name="tab.globallinktranslatedcontent.properties.section.properties">
+						<listlayout>
+							<attribute name="item" editable="false" />
+							<attribute name="source" editable="false" />
+							<attribute name="target" editable="false" />
+							<attribute name="creationtime" editable="false" />
+							<attribute name="modifiedtime" editable="false" />
+							<attribute name="hashCode" editable="false" />
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	
+	<!--
+		Wizard View (Wizard definition can be found in items.xml)
+	-->
+	<type name="GlobalLinkCreateJobWizard" mode="append"><!-- Using mode="append" to remove warnings about missing search and result sections -->
+		<organizer>
+			<editor>
+				<exclude>
+				</exclude>
+				<tab name="wizard.createjob.project.name">
+					<section name="wizard.createjob.project.project">
+						<listlayout>
+							<customchip jsp="/ext/globallink/windowResizeChip.jsp" />
+							<attribute name="project" labelwidth="60">
+								<customeditor classname="org.gs4tr.projectdirector.adaptors.hybris.hmc.webchips.ProjectSelectionEditorChip">
+									<parameter key="availableProjects" value="availableProjects" />
+								</customeditor>
+							</attribute>
+						</listlayout>
+					</section>
+				</tab>
+				<tab name="wizard.createjob.config.name">
+					<section name="wizard.createjob.config.config">
+						<listlayout>
+							<customchip jsp="/ext/globallink/windowResizeChip.jsp" />
+							<attribute name="translateAll" labelwidth="110">
+								<advancedbooleaneditor truename="wizard.createjob.config.translateall.all"
+									falsename="wizard.createjob.config.translateall.selected" wrapvalues="true" />
+							</attribute>
+							<attribute name="jobName" labelwidth="110" />
+							<attribute name="dueDate" labelwidth="110" />
+							<attribute name="sourceLanguage" labelwidth="110">
+								<customeditor classname="org.gs4tr.projectdirector.adaptors.hybris.hmc.webchips.SourceLanguageSelectionEditorChip" />
+							</attribute>
+							<attribute name="targetLanguages" labelwidth="110">
+								<customeditor classname="org.gs4tr.projectdirector.adaptors.hybris.hmc.webchips.TargetLanguagesSelectionEditorChip" />
+							</attribute>
+							<attribute name="newAndChangedOnly" hidelabel="true">
+								<customeditor classname="org.gs4tr.projectdirector.adaptors.hybris.hmc.webchips.CheckboxEditorChip">
+									<parameter key="label" value="wizard.createjob.config.newandchangedonly.newandchanged" />
+								</customeditor>
+							</attribute>
+<!--
+							<attribute name="translateKeywords" hidelabel="true">
+								<customeditor classname="org.gs4tr.projectdirector.adaptors.hybris.hmc.webchips.CheckboxEditorChip">
+									<parameter key="label" value="wizard.createjob.config.translatekeywords.translate" />
+								</customeditor>
+							</attribute>
+-->
+							<attribute name="translateProductFeatures" hidelabel="true">
+								<customeditor classname="org.gs4tr.projectdirector.adaptors.hybris.hmc.webchips.CheckboxEditorChip">
+									<parameter key="label" value="wizard.createjob.config.translateproductfeatures.translate" />
+								</customeditor>
+							</attribute>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	
+	<!--
+		Run Wizard actions
+	-->
+	<type name="CMSItem" mode="append">
+		<organizer mode="append">
+			<result mode="append">
+				<action name="action.translateitemlist.name"
+					classname="org.gs4tr.projectdirector.adaptors.hybris.hmc.action.TranslateItemListAction"
+					type="searchresult" />
+			</result>
+		</organizer>
+	</type>
+	<type name="Item" mode="append">
+		<organizer mode="append">
+			<result mode="append">
+				<action name="action.translateitemlist.name"
+					classname="org.gs4tr.projectdirector.adaptors.hybris.hmc.action.TranslateItemListAction"
+					type="searchresult" />
+			</result>
+<!--
+			<editor mode="append">
+				<tab name="administration" mode="append">
+					<section name="section.globallink">
+						<table>
+							<tr>
+								<td width="13px" />
+								<td>
+									<action name="action.translateitem.name"
+										classname="org.gs4tr.projectdirector.adaptors.hybris.hmc.action.TranslateItemAction"
+										icon="../../ext/globallink/images/button_language.gif" type="item"
+										toolbaricon="../../ext/globallink/images/button_language.gif" showtoolbarlabel="true" />
+								</td>
+							</tr>
+						</table>
+					</section>
+				</tab>
+			</editor>
+-->
+		</organizer>
+	</type>
+</configuration>

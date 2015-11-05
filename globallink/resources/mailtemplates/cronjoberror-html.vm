@@ -1,0 +1,66 @@
+## This is the header
+Errors in CronJob $cronjob
+## This is the body
+<p>$message<p>
+
+#if ($exception)
+<p>The following error was encountered: <b>$exception</b><p>
+#end
+
+#if ($job)
+<p>
+GlobalLink Job Details:
+<table>
+	<tr>
+		<td>PK</td>
+		<td>$job.pk.longValueAsString</td>
+	</tr>
+	<tr>
+		<td>ID</td>
+		<td>$job.id</td>
+	</tr>
+	<tr>
+		<td>Name</td>
+		<td>$job.name</td>
+	</tr>
+	<tr>
+		<td>Project</td>
+		<td>$job.project</td>
+	</tr>
+	<tr>
+		<td>Status</td>
+		<td>$job.status</td>
+	</tr>
+	<tr>
+		<td>Source Language</td>
+		<td>$job.sourceLanguage.name</td>
+	</tr>
+	<tr>
+		<td>Target Language</td>
+		<td>
+			<ol>
+#foreach ($language in $job.targetLanguages)
+<li>$language.name</li>
+#end
+			</ol>
+		</td>
+	</tr>
+	<tr>
+		<td>Submission Tickets</td>
+		<td>
+#foreach ($ticket in $job.submissionTickets)
+${velocityCount}. ${ticket.ticket}
+#end
+		</td>
+	</tr>
+</table>
+</p>
+
+#end
+
+#if ($stacktrace)
+<p>
+Stack Trace:<br>
+<pre>$stacktrace</pre>
+</p>
+#end

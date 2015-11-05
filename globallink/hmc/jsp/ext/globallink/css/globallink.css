@@ -1,0 +1,46 @@
+.targetLanguagesSelectionEditorChip div.header {
+	font-weight: normal;
+	margin: 0 5px;
+}
+
+.targetLanguagesSelectionEditorChip div.header.mandatory {
+	font-weight: bold;
+}
+
+.targetLanguagesSelectionEditorChip td.column {
+	border-right:1px solid #bbbbbb;
+}
+
+.targetLanguagesSelectionEditorChip td.column > div {
+	margin: 0 5px;
+}
+
+.typeAttributesSelectionEditorChip div.header {
+	font-weight: normal;
+	margin: 0 5px;
+}
+
+.typeAttributesSelectionEditorChip div.header.mandatory {
+	font-weight: bold;
+}
+
+.typeAttributesSelectionEditorChip td.column {
+	border-right:1px solid #bbbbbb;
+}
+
+.typeAttributesSelectionEditorChip td.column > div {
+	margin: 0 5px;
+}
+
+.languageMappingLocaleEditorChip > select, .sourceLanguageSelectionEditorChip > select {
+	background-color: #ffffff;
+	border: 1px solid #666666;
+	font-family: Arial;
+	font-size: 8pt;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+div.summary {
+	padding: 5px;
+}

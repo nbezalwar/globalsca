@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?taglib 			uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:h="http://www.w3.org/1999/xhtml" 
+		xmlns:zk="http://www.zkoss.org/2005/zk"
+		xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd ">
+		
+	<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+	
+	<zscript><![CDATA[
+		import java.text.SimpleDateFormat;
+		import java.util.Date;
+		import org.zkoss.zk.ui.Executions;
+		import org.zkoss.zul.api.Listcell;
+		import org.gs4tr.projectdirector.adaptors.hybris.enums.GlobalLinkJobItemTargetStatus;
+		import org.gs4tr.projectdirector.adaptors.hybris.model.GlobalLinkJobModel;
+		import org.gs4tr.projectdirector.adaptors.hybris.cockpit.components.inspector.impl.GlobalCockpitInspector;
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy hh:mm aa");
+		GlobalCockpitInspector controllerBean = Executions.getCurrent().getArg().get(GlobalCockpitInspector.ARG_CONTROLLER_BEAN);
+		GlobalLinkJobModel job = Executions.getCurrent().getArg().get(GlobalCockpitInspector.ARG_JOB);
+		
+		int selections = -1;
+		Object[] selectionsParams;
+		if( Executions.getCurrent().getArg().get(GlobalCockpitInspector.ARG_NUM_SELECTIONS) != null ) {
+			Integer s = Executions.getCurrent().getArg().get(GlobalCockpitInspector.ARG_NUM_SELECTIONS);
+			selections = s.intValue();
+			selectionsParams = new Object[]{s};
+		}
+		
+		void renderDate( Listcell cell ) {
+			Date date = cell.getValue();
+			cell.setLabel( dateFormat.format( date ) );
+		}
+		
+		void renderStatus( Listcell cell ) {
+			GlobalLinkJobItemTargetStatus status = cell.getValue();
+			cell.setLabel(l10nService.getLocalizedString("type.globallinkjobitemtargetstatus." + status.name().toLowerCase()));
+		}
+		
+ 		String itemLabel;
+ 		if( job != null ) {
+	 		itemLabel = job.getId() + " - " + job.getName();
+ 		}
+	]]></zscript>
+	
+	<div sclass="inspectorheader" if="${empty job}">
+		<label tooltip="${c:l('globalcockpit.inspector.noitems')}" value="${c:l('globalcockpit.inspector.noitems')}" if="${selections == 0}" />
+		<label tooltip="${c:l2('globalcockpit.inspector.multipleitems', selectionsParams)}" value="${c:l2('globalcockpit.inspector.multipleitems', selectionsParams)}" unless="${selections != 0}" />
+	</div>
+	
+	<div sclass="inspectorheader" if="${not empty job}">
+		<label tooltip="${itemLabel}" value="${itemLabel}" />
+		<div sclass="subheader">
+			<label value="${c:l('globalcockpit.inspector.translateditems')}" />
+		</div>
+	</div>
+	
+	<div sclass="inspectorlistboxcontainer" if="${not empty job}">
+		<listbox sclass="itemlistbox scrollable-listbox" width="360px">
+			<listhead>
+				<listheader label="${c:l('globalcockpit.inspector.column.id')}" width="35px" />
+				<listheader label="${c:l('globalcockpit.inspector.column.itemname')}" width="155px" />
+				<listheader label="${c:l('globalcockpit.inspector.column.language')}" width="60px" />
+				<listheader label="${c:l('globalcockpit.inspector.column.status')}" width="60px" />
+				<listheader label="${c:l('globalcockpit.inspector.column.translationdate')}" width="105px" />
+			</listhead>
+			<zk forEach="${job.jobItems}">
+				<listitem forEach="${each.targets}">
+					<listcell label="${forEachStatus.previous.each.id}" />
+					<listcell label="${forEachStatus.previous.each.name}" />
+					<listcell label="${each.targetLanguage.name}" />
+					<listcell value="${each.status}" onCreate="renderStatus(self)" />
+					<listcell value="${each.modifiedtime}" onCreate="renderDate(self)" if="${each.status eq 'COMPLETE'}" />
+					<listcell if="${each.status ne 'COMPLETE'}"/>
+				</listitem>
+			</zk>
+		</listbox>
+	</div>
+
+</zk>

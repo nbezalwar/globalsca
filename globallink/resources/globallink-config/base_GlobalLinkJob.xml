@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="GlobalLinkJob.id" />
+			<property qualifier="GlobalLinkJob.creationtime" />
+			<property qualifier="GlobalLinkJob.dueDate" />
+			<property qualifier="GlobalLinkJob.status" />
+			<property qualifier="GlobalLinkJob.name" />
+			<property qualifier="GlobalLinkJob.sourceLanguage" />
+			<property qualifier="GlobalLinkJob.targetLanguages" />
+			<property qualifier="GlobalLinkJob.creator" />
+		</search-properties>
+		<sort-properties>
+			<property qualifier="GlobalLinkJob.id" />
+			<property qualifier="GlobalLinkJob.creationtime" />
+			<property qualifier="GlobalLinkJob.dueDate" />
+			<property qualifier="GlobalLinkJob.status" />
+			<property qualifier="GlobalLinkJob.name" />
+			<property qualifier="GlobalLinkJob.sourceLanguage" />
+			<property qualifier="GlobalLinkJob.targetLanguages" />
+			<property qualifier="GlobalLinkJob.creator" />
+		</sort-properties>
+	</search>
+	<label>
+		<property qualifier="GlobalLinkJob.id" />
+		<property qualifier="GlobalLinkJob.creationtime" />
+		<property qualifier="GlobalLinkJob.dueDate" />
+		<property qualifier="GlobalLinkJob.status" />
+		<property qualifier="GlobalLinkJob.name" />
+		<property qualifier="GlobalLinkJob.sourceLanguage" />
+		<property qualifier="GlobalLinkJob.targetLanguages" />
+		<property qualifier="GlobalLinkJob.creator" />
+		<property qualifier="GlobalLinkJob.error" />
+	</label>
+</base>
