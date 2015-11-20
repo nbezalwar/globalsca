@@ -9,13 +9,15 @@ import org.w3c.dom.Element;
 
 /**
  * @author sseibold
- * 
+ *
  */
 public abstract class ScaMetadataDecorator extends AbstractXmlDecorator
 {
+	static final String ATTR_METADATA_TRP_METADATA = "meta";
+
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator.AbstractXmlDecorator#decorateAttributeElement(
 	 * org.gs4tr.projectdirector.adaptors.hybris.service.LocalizableItem,

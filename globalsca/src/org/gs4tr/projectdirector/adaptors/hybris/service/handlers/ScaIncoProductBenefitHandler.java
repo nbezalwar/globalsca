@@ -7,12 +7,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import com.sca.pim.model.IncoProductBenefitModel;
+import com.sca.pim.model.ScaCelumAssetModel;
 import com.sca.pim.model.SegmentizedTextModel;
 
 
 /**
  * @author sseibold
- * 
+ *
  */
 public class ScaIncoProductBenefitHandler extends ProductHandler
 {
@@ -47,6 +48,18 @@ public class ScaIncoProductBenefitHandler extends ProductHandler
 			return true;
 		}
 
+		if (attribute.getQualifier().equals(IncoProductBenefitModel.IMAGE))
+		{
+			return true;
+		}
+		if (attribute.getQualifier().equals(IncoProductBenefitModel.VIDEO))
+		{
+			return true;
+		}
+		if (attribute.getQualifier().equals(IncoProductBenefitModel.ICON))
+		{
+			return true;
+		}
 		return super.holdsLocalizableChild(attribute);
 	}
 
@@ -68,7 +81,18 @@ public class ScaIncoProductBenefitHandler extends ProductHandler
 		{
 			return getDescription((IncoProductBenefitModel) item);
 		}
-
+		if (attribute.getQualifier().equals(IncoProductBenefitModel.IMAGE))
+		{
+			return getImage((IncoProductBenefitModel) item);
+		}
+		if (attribute.getQualifier().equals(IncoProductBenefitModel.VIDEO))
+		{
+			return getVideo((IncoProductBenefitModel) item);
+		}
+		if (attribute.getQualifier().equals(IncoProductBenefitModel.ICON))
+		{
+			return getIcon((IncoProductBenefitModel) item);
+		}
 		return super.getChildValue(item, attribute);
 	}
 
@@ -86,4 +110,18 @@ public class ScaIncoProductBenefitHandler extends ProductHandler
 		return segments;
 	}
 
+	private ScaCelumAssetModel getImage(final IncoProductBenefitModel incoProductBenefit)
+	{
+		return incoProductBenefit.getImage();
+	}
+
+	private ScaCelumAssetModel getVideo(final IncoProductBenefitModel incoProductBenefit)
+	{
+		return incoProductBenefit.getVideo();
+	}
+
+	private ScaCelumAssetModel getIcon(final IncoProductBenefitModel incoProductBenefit)
+	{
+		return incoProductBenefit.getIcon();
+	}
 }

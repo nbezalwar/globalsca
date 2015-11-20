@@ -14,12 +14,13 @@ import com.sca.pim.model.EnvInfoTextSegmentModel;
 public class ScaEnvInfoTextSegmentDecorator extends ScaMetadataDecorator
 {
 	private static final String ATTR_METADATA_HEADERLEVEL = "headerLevel";
+	private static final String ATTR_TRP_METADATA = "meta";
 
 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.gs4tr.projectdirector.adaptors.hybris.service.xml.XMLDecorator#supports(org.gs4tr.projectdirector.adaptors
 	 * .hybris.service.LocalizableItem)
@@ -32,7 +33,7 @@ public class ScaEnvInfoTextSegmentDecorator extends ScaMetadataDecorator
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator.AbstractXmlDecorator#decorateItemElement(org.gs4tr
 	 * .projectdirector.adaptors.hybris.service.LocalizableItem, org.w3c.dom.Element, org.w3c.dom.Document)
@@ -44,6 +45,8 @@ public class ScaEnvInfoTextSegmentDecorator extends ScaMetadataDecorator
 		if (segment.getHeaderLevel() != null)
 		{
 			element.setAttribute(ATTR_METADATA_HEADERLEVEL, segment.getHeaderLevel().getType());
+			element.setAttribute(ATTR_TRP_METADATA, segment.getHeaderLevel().getType());
+
 		}
 
 	}

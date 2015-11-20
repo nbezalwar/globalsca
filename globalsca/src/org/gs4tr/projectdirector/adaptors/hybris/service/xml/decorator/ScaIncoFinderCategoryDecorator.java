@@ -1,5 +1,7 @@
 package org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator;
 
+import de.hybris.platform.core.model.type.AttributeDescriptorModel;
+
 import org.gs4tr.projectdirector.adaptors.hybris.service.LocalizableItem;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -13,13 +15,13 @@ import com.sca.pim.model.IncoFinderCategoryModel;
  */
 public class ScaIncoFinderCategoryDecorator extends ScaMetadataDecorator
 {
-	private static final String ATTR_METADATA_CODE = "meta_code";
+	private static final String ATTR_METADATA_CODE = "code";
 
-	private static final String ATTR_METADATA_NAME = "meta_name";
+	private static final String ATTR_METADATA_NAME = "name";
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * org.gs4tr.projectdirector.adaptors.hybris.service.xml.XMLDecorator#supports(org.gs4tr.projectdirector.adaptors
 	 * .hybris.service.LocalizableItem)
@@ -32,7 +34,7 @@ public class ScaIncoFinderCategoryDecorator extends ScaMetadataDecorator
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator.AbstractXmlDecorator#decorateItemElement(org.gs4tr
 	 * .projectdirector.adaptors.hybris.service.LocalizableItem, org.w3c.dom.Element, org.w3c.dom.Document)
@@ -49,6 +51,22 @@ public class ScaIncoFinderCategoryDecorator extends ScaMetadataDecorator
 		{
 			element.setAttribute(ATTR_METADATA_NAME, category.getName());
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator.ScaMetadataDecorator#decorateAttributeElement(
+	 * org.gs4tr.projectdirector.adaptors.hybris.service.LocalizableItem,
+	 * de.hybris.platform.core.model.type.AttributeDescriptorModel, org.w3c.dom.Element, org.w3c.dom.Document)
+	 */
+	@Override
+	public void decorateAttributeElement(final LocalizableItem localizableItem, final AttributeDescriptorModel attribute,
+			final Element element, final Document document)
+	{
+		super.decorateAttributeElement(localizableItem, attribute, element, document);
+		element.setAttribute(ATTR_METADATA_TRP_METADATA, attribute.getQualifier());
 	}
 
 }

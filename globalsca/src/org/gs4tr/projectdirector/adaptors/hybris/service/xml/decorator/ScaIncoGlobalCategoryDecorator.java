@@ -9,17 +9,17 @@ import com.sca.pim.model.IncoGlobalCategoryModel;
 
 /**
  * @author sseibold
- * 
+ *
  */
 public class ScaIncoGlobalCategoryDecorator extends ScaMetadataDecorator
 {
-	private static final String ATTR_METADATA_CODE = "meta_code";
+	private static final String ATTR_METADATA_CODE = "code";
 
-	private static final String ATTR_METADATA_NAME = "meta_name";
+	private static final String ATTR_METADATA_NAME = "name";
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.gs4tr.projectdirector.adaptors.hybris.service.xml.XMLDecorator#supports(org.gs4tr.projectdirector.adaptors
 	 * .hybris.service.LocalizableItem)
@@ -32,7 +32,7 @@ public class ScaIncoGlobalCategoryDecorator extends ScaMetadataDecorator
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator.AbstractXmlDecorator#decorateItemElement(org.gs4tr
 	 * .projectdirector.adaptors.hybris.service.LocalizableItem, org.w3c.dom.Element, org.w3c.dom.Document)

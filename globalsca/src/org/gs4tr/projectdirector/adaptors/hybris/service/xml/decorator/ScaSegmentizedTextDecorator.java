@@ -1,5 +1,8 @@
 package org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator;
 
+import de.hybris.platform.core.model.type.AttributeDescriptorModel;
+
+import org.apache.commons.lang.StringUtils;
 import org.gs4tr.projectdirector.adaptors.hybris.service.LocalizableItem;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -42,6 +45,34 @@ public class ScaSegmentizedTextDecorator extends ScaMetadataDecorator
 	{
 		final SegmentizedTextModel segment = (SegmentizedTextModel) localizableItem.getItem();
 		element.setAttribute(ATTR_METADATA_SEGMENT, segment.getSegment().name());
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator.ScaMetadataDecorator#decorateAttributeElement(
+	 * org.gs4tr.projectdirector.adaptors.hybris.service.LocalizableItem,
+	 * de.hybris.platform.core.model.type.AttributeDescriptorModel, org.w3c.dom.Element, org.w3c.dom.Document)
+	 */
+	@Override
+	public void decorateAttributeElement(final LocalizableItem localizableItem, final AttributeDescriptorModel attribute,
+			final Element element, final Document document)
+	{
+		super.decorateAttributeElement(localizableItem, attribute, element, document);
+
+		final SegmentizedTextModel segment = (SegmentizedTextModel) localizableItem.getItem();
+		String value;
+		if (localizableItem.getParentAttribute() != null)
+		{
+			value = localizableItem.getParentAttribute().getQualifier();
+		}
+		else
+		{
+			value = StringUtils.EMPTY;
+		}
+		value = value + "," + segment.getSegment().name();
+
+		element.setAttribute(ATTR_METADATA_TRP_METADATA, value);
 	}
 }

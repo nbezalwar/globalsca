@@ -7,20 +7,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import com.sca.pim.model.IncoGlobalCategoryModel;
-import com.sca.pim.model.ScaCelumAssetModel;
 import com.sca.pim.model.SegmentizedTextModel;
 
 
 /**
  * @author sseibold
- * 
+ *
  */
 public class ScaIncoGlobalCategoryHandler extends CategoryHandler
 {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.gs4tr.projectdirector.adaptors.hybris.service.handlers.ProductHandler#getSupportedModelClass()
 	 */
 	@Override
@@ -31,7 +30,7 @@ public class ScaIncoGlobalCategoryHandler extends CategoryHandler
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.gs4tr.projectdirector.adaptors.hybris.service.handlers.ProductHandler#holdsLocalizableChild(de.hybris.platform
 	 * .core.model.type.AttributeDescriptorModel)
@@ -73,7 +72,7 @@ public class ScaIncoGlobalCategoryHandler extends CategoryHandler
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.gs4tr.projectdirector.adaptors.hybris.service.handlers.ProductHandler#getChildValue(de.hybris.platform.core
 	 * .model.ItemModel, de.hybris.platform.core.model.type.AttributeDescriptorModel)
@@ -81,13 +80,13 @@ public class ScaIncoGlobalCategoryHandler extends CategoryHandler
 	@Override
 	protected Object getChildValue(final ItemModel item, final AttributeDescriptorModel attribute)
 	{
-		if (attribute.getQualifier().equals(IncoGlobalCategoryModel.SEGMENTTITLE))
+		if (attribute.getQualifier().equals(IncoGlobalCategoryModel.PAGETITLE))
 		{
-			return getSegmentTitle((IncoGlobalCategoryModel) item);
+			return getPageTitle((IncoGlobalCategoryModel) item);
 		}
-		if (attribute.getQualifier().equals(IncoGlobalCategoryModel.SEGMENTDESCRIPTION))
+		if (attribute.getQualifier().equals(IncoGlobalCategoryModel.PAGEDESCRIPTION))
 		{
-			return getSegmentDescription((IncoGlobalCategoryModel) item);
+			return getPageDescription((IncoGlobalCategoryModel) item);
 		}
 		if (attribute.getQualifier().equals(IncoGlobalCategoryModel.FAMILYBENEFIT1))
 		{
@@ -105,25 +104,22 @@ public class ScaIncoGlobalCategoryHandler extends CategoryHandler
 		{
 			return getFamilyBenefit4((IncoGlobalCategoryModel) item);
 		}
-		if (attribute.getQualifier().equals(IncoGlobalCategoryModel.ICON))
-		{
-			return getIcon((IncoGlobalCategoryModel) item);
-		}
+
 
 		return super.getChildValue(item, attribute);
 	}
 
-	private Collection<SegmentizedTextModel> getSegmentTitle(final IncoGlobalCategoryModel incoGlobalCategory)
+	private Collection<SegmentizedTextModel> getPageTitle(final IncoGlobalCategoryModel incoGlobalCategory)
 	{
 		final Collection<SegmentizedTextModel> segments = new ArrayList<SegmentizedTextModel>();
-		segments.addAll(incoGlobalCategory.getSegmentTitle());
+		segments.addAll(incoGlobalCategory.getPageTitle());
 		return segments;
 	}
 
-	private Collection<SegmentizedTextModel> getSegmentDescription(final IncoGlobalCategoryModel incoGlobalCategory)
+	private Collection<SegmentizedTextModel> getPageDescription(final IncoGlobalCategoryModel incoGlobalCategory)
 	{
 		final Collection<SegmentizedTextModel> segments = new ArrayList<SegmentizedTextModel>();
-		segments.addAll(incoGlobalCategory.getSegmentDescription());
+		segments.addAll(incoGlobalCategory.getPageDescription());
 		return segments;
 	}
 
@@ -155,9 +151,6 @@ public class ScaIncoGlobalCategoryHandler extends CategoryHandler
 		return segments;
 	}
 
-	private ScaCelumAssetModel getIcon(final IncoGlobalCategoryModel incoGlobalCategory)
-	{
-		return incoGlobalCategory.getIcon();
-	}
+
 
 }

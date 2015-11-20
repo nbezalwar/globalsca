@@ -1,5 +1,7 @@
 package org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator;
 
+import de.hybris.platform.core.model.type.AttributeDescriptorModel;
+
 import org.gs4tr.projectdirector.adaptors.hybris.service.LocalizableItem;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -9,7 +11,7 @@ import com.sca.pim.model.IncoProductModel;
 
 /**
  * @author sseibold
- *
+ * 
  */
 public class ScaIncoProductDecorator extends ScaMetadataDecorator
 {
@@ -43,6 +45,22 @@ public class ScaIncoProductDecorator extends ScaMetadataDecorator
 		final IncoProductModel product = (IncoProductModel) localizableItem.getItem();
 		element.setAttribute(ATTR_METADATA_CODE, product.getCode());
 		element.setAttribute(ATTR_METADATA_NAME, product.getName());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator.ScaMetadataDecorator#decorateAttributeElement(
+	 * org.gs4tr.projectdirector.adaptors.hybris.service.LocalizableItem,
+	 * de.hybris.platform.core.model.type.AttributeDescriptorModel, org.w3c.dom.Element, org.w3c.dom.Document)
+	 */
+	@Override
+	public void decorateAttributeElement(final LocalizableItem localizableItem, final AttributeDescriptorModel attribute,
+			final Element element, final Document document)
+	{
+		super.decorateAttributeElement(localizableItem, attribute, element, document);
+		element.setAttribute(ATTR_METADATA_TRP_METADATA, attribute.getQualifier());
 	}
 
 }

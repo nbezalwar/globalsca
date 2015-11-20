@@ -29,8 +29,8 @@
 	<util:list id="scaItemHandlers" value-type="org.gs4tr.projectdirector.adaptors.hybris.service.ItemHandler">
 		<!-- Order is important if Items are instanceof multiple types for which handlers exist -->
 		<!-- Start SCA custom handlers -->
-		<ref bean="scaScaProductHandler" />
-		<ref bean="scaScaGlobalCategoryHandler" />
+		<!--ref bean="scaScaProductHandler" /-->
+		<!-- ref bean="scaScaGlobalCategoryHandler" / -->
 		<ref bean="scaEnvInfoTextBlockHandler" />
 		<ref bean="scaIncoProductHandler" />
 		<ref bean="scaIncoGlobalCategoryHandler" />
@@ -46,13 +46,13 @@
 		<ref bean="itemModelHandler" /><!-- leave as last -->
 	</util:list>
 	
-	<bean id="scaScaProductHandler"
+	<!-- bean id="scaScaProductHandler"
 		class="org.gs4tr.projectdirector.adaptors.hybris.service.handlers.ScaScaProductHandler"
-		parent="defaultItemHandler" />
+		parent="defaultItemHandler" / -->
 	
-	<bean id="scaScaGlobalCategoryHandler"
+	<!-- bean id="scaScaGlobalCategoryHandler"
 		class="org.gs4tr.projectdirector.adaptors.hybris.service.handlers.ScaScaGlobalCategoryHandler"
-		parent="defaultItemHandler" />
+		parent="defaultItemHandler" / -->
 	
 	<bean id="scaEnvInfoTextBlockHandler"
 		class="org.gs4tr.projectdirector.adaptors.hybris.service.handlers.ScaEnvInfoTextBlockHandler"

@@ -1,5 +1,7 @@
 package org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator;
 
+import de.hybris.platform.core.model.type.AttributeDescriptorModel;
+
 import org.gs4tr.projectdirector.adaptors.hybris.service.LocalizableItem;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -55,6 +57,22 @@ public class ScaScaProductDecorator extends ScaMetadataDecorator
 		element.setAttribute(ATTR_METADATA_VARIANT_NUMBER, product.getVariantNumber());
 		element.setAttribute(ATTR_METADATA_SAP_MATERIAL_GROUP_ID, product.getSapMaterialGroupId());
 		element.setAttribute(ATTR_METADATA_SAP_MATERIAL_GROUP_NAME, product.getSapMaterialGroupName());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.gs4tr.projectdirector.adaptors.hybris.service.xml.decorator.ScaMetadataDecorator#decorateAttributeElement(
+	 * org.gs4tr.projectdirector.adaptors.hybris.service.LocalizableItem,
+	 * de.hybris.platform.core.model.type.AttributeDescriptorModel, org.w3c.dom.Element, org.w3c.dom.Document)
+	 */
+	@Override
+	public void decorateAttributeElement(final LocalizableItem localizableItem, final AttributeDescriptorModel attribute,
+			final Element element, final Document document)
+	{
+		super.decorateAttributeElement(localizableItem, attribute, element, document);
+		element.setAttribute(ATTR_METADATA_TRP_METADATA, attribute.getQualifier());
 	}
 
 }
