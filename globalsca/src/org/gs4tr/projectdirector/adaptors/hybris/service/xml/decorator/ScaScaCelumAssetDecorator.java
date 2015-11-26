@@ -73,7 +73,7 @@ public class ScaScaCelumAssetDecorator extends ScaMetadataDecorator
 		{
 			value = StringUtils.EMPTY;
 		}
-		value = value + "," + attribute.getQualifier();
+		value = value + ", " + attribute.getQualifier();
 		element.setAttribute(ATTR_METADATA_TRP_METADATA, value);
 	}
 }

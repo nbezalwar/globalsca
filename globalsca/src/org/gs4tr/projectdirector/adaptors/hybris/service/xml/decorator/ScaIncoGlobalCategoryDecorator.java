@@ -43,6 +43,7 @@ public class ScaIncoGlobalCategoryDecorator extends ScaMetadataDecorator
 		final IncoGlobalCategoryModel category = (IncoGlobalCategoryModel) localizableItem.getItem();
 		element.setAttribute(ATTR_METADATA_CODE, category.getCode());
 		element.setAttribute(ATTR_METADATA_NAME, category.getName());
+		element.setAttribute("meta", element.getAttribute("key")); // Copy Key to Meta
 	}
 
 }

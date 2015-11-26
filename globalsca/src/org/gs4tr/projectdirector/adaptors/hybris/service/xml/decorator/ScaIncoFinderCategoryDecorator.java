@@ -15,9 +15,9 @@ import com.sca.pim.model.IncoFinderCategoryModel;
  */
 public class ScaIncoFinderCategoryDecorator extends ScaMetadataDecorator
 {
-	private static final String ATTR_METADATA_CODE = "code";
+	private static final String ATTR_METADATA_TITLE = "Title";
 
-	private static final String ATTR_METADATA_NAME = "name";
+	private static final String ATTR_METADATA_NAME = "Name";
 
 	/*
 	 * (non-Javadoc)
@@ -43,9 +43,9 @@ public class ScaIncoFinderCategoryDecorator extends ScaMetadataDecorator
 	public void decorateItemElement(final LocalizableItem localizableItem, final Element element, final Document document)
 	{
 		final IncoFinderCategoryModel category = (IncoFinderCategoryModel) localizableItem.getItem();
-		if (category.getCode() != null)
+		if (category.getQuestionTitle() != null)
 		{
-			element.setAttribute(ATTR_METADATA_CODE, category.getCode());
+			element.setAttribute(ATTR_METADATA_TITLE, category.getQuestionTitle());
 		}
 		if (category.getName() != null)
 		{

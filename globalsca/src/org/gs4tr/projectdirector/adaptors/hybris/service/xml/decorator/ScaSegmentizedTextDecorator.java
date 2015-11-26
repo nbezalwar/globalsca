@@ -10,6 +10,8 @@ import org.w3c.dom.Element;
 import com.sca.pim.model.SegmentizedTextModel;
 
 
+
+
 /**
  * @author sseibold
  *
@@ -71,7 +73,7 @@ public class ScaSegmentizedTextDecorator extends ScaMetadataDecorator
 		{
 			value = StringUtils.EMPTY;
 		}
-		value = value + "," + segment.getSegment().name();
+		value = value + ", " + segment.getSegment().name();
 
 		element.setAttribute(ATTR_METADATA_TRP_METADATA, value);
 	}
