@@ -38,11 +38,11 @@ public class ScaIncoGlobalCategoryHandler extends CategoryHandler
 	@Override
 	protected boolean holdsLocalizableChild(final AttributeDescriptorModel attribute)
 	{
-		if (attribute.getQualifier().equals(IncoGlobalCategoryModel.SEGMENTTITLE))
+		if (attribute.getQualifier().equals(IncoGlobalCategoryModel.PAGETITLE))
 		{
 			return true;
 		}
-		if (attribute.getQualifier().equals(IncoGlobalCategoryModel.SEGMENTDESCRIPTION))
+		if (attribute.getQualifier().equals(IncoGlobalCategoryModel.PAGEDESCRIPTION))
 		{
 			return true;
 		}
